@@ -1,2 +1,2 @@
 # fps-game-unity
-the unity repo for my fps game
+yep, this is the game. i'm gonna add a itch.io link to this later when i finish the game

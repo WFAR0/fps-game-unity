@@ -34,7 +34,7 @@ void start()
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit))
         {
         isFiring = true;
-        Target target = hit.transform.GetComponent<Target>();
+        Target target = hit.transform.GetComponent<target>();
         if (target != null) 
         {
             target.takeDamage;
@@ -47,11 +47,9 @@ void start()
         yield return new WaitForSeconds(0.13f);
         blackPistol.GetComponent<Animator>().Play("New State");
         isFiring = false;
+
         }
         }
     }
 
-
-
-  
 }

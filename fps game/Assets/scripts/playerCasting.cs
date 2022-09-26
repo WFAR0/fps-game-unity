@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class playerCasting : MonoBehaviour
 {
+   
     public static float distanceFromTarget;
     public float toTarget;
 

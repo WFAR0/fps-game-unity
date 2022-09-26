@@ -4,52 +4,58 @@ using UnityEngine;
 
 public class pistolFire : MonoBehaviour
 {
-    public GameObject blackPistol;
+     public GameObject blackPistol;
     public bool isFiring = false;
-    public GameObject muzzleFlash;
-    public AudioSource pistolShot;
-    public AudioClip pistolShotSound;
-    public float damage = 10f;
-    public float range = 100f;
-    public Camera fpsCam;
-  
-
-
-
-
-void start() 
-{
-    pistolShot = GetComponent<AudioSource>();
-}
-
+    public ParticleSystem muzzleFlash;
+    public AudioSource pistolShot;   
+    public AudioClip gunshot;
+    public int maxAmmo = 18;
+    public int currAmmo;
+    private bool isReloading = false;
     void Update()
     {
-        if(Input.GetButtonDown("Fire1"))
+
+        if(isReloading = false) 
+        return;
+
+        if(currAmmo <= 0) 
         {
-            shoot();
+             StartCoroutine(Reload());
+            return;
         }
 
-        void shoot () {    
-        RaycastHit hit;
-        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit))
+        if (Input.GetButtonDown("Fire1"))
         {
-        isFiring = true;
-        Target target = hit.transform.GetComponent<target>();
-        if (target != null) 
-        {
-            target.takeDamage;
+            if (isFiring == false)
+            {
+                StartCoroutine(FireThePistol());
+            }
         }
+    
+    }
+
+    IEnumerator FireThePistol()
+    {
+        currAmmo--;
+        isFiring = true;
         blackPistol.GetComponent<Animator>().Play("firePistol");
-        pistolShot.PlayOneShot(pistolShotSound);
-        muzzleFlash.SetActive(true);
-        yield return new WaitForSeconds(0.015f);
-        muzzleFlash.SetActive(false);
+       pistolShot.PlayOneShot(gunshot);
+        muzzleFlash.Play(true);
         yield return new WaitForSeconds(0.13f);
         blackPistol.GetComponent<Animator>().Play("New State");
         isFiring = false;
-
-        }
-        }
     }
 
+    IEnumerator Reload()
+    {
+        isReloading = true;
+        Debug.Log("reloading...");
+         blackPistol.GetComponent<Animator>().Play("pistolReload");
+        yield return new WaitForSeconds(3f);   
+        currAmmo = maxAmmo;
+        isReloading = false;
+
+    } 
 }
+
+

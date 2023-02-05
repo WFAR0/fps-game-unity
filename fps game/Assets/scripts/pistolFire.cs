@@ -51,7 +51,7 @@ public class pistolFire : MonoBehaviour
         isReloading = true;
         Debug.Log("reloading...");
          blackPistol.GetComponent<Animator>().Play("pistolReload");
-        yield return new WaitForSeconds(3f);   
+        yield return new WaitForSeconds(1f);   
         currAmmo = maxAmmo;
         isReloading = false;
 

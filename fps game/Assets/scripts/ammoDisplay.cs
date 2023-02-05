@@ -5,14 +5,10 @@ using UnityEngine.UI;
 
 public class ammoDisplay : MonoBehaviour
 {
-    public GameObject ammoTextUI;
+    public Text ammoTextUI;
     public pistolFire script;
 
-    void start () {
-        
-    }
-
     void update() {
-        ammoTextUI.GetComponent<Text>().text = script.currAmmo + "/18";
+        ammoTextUI.text = script.currAmmo + "/18";
     }
 }

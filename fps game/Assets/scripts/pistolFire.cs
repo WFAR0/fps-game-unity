@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class pistolFire : MonoBehaviour
 {
@@ -9,18 +10,19 @@ public class pistolFire : MonoBehaviour
     public ParticleSystem muzzleFlash;
     public AudioSource pistolShot;   
     public AudioClip gunshot;
-    public int maxAmmo = 18;
+    public int maxAmmo = 16;
     public int currAmmo;
     private bool isReloading = false;
+
     void Update()
     {
 
-        if(isReloading = false) 
-        return;
 
-        if(currAmmo <= 0) 
+        if(currAmmo <= 0 && !isReloading) 
         {
+            isReloading = true;    
              StartCoroutine(Reload());
+             
             return;
         }
 
@@ -48,7 +50,7 @@ public class pistolFire : MonoBehaviour
 
     IEnumerator Reload()
     {
-        isReloading = true;
+       
         Debug.Log("reloading...");
          blackPistol.GetComponent<Animator>().Play("pistolReload");
         yield return new WaitForSeconds(1f);   
